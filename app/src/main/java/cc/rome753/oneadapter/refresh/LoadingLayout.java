@@ -1,4 +1,4 @@
-package cc.rome753.oneadapter.base.refresh;
+package cc.rome753.oneadapter.refresh;
 
 import android.content.Context;
 import android.widget.FrameLayout;

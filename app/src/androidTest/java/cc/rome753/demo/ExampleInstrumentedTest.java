@@ -1,4 +1,4 @@
-package cc.rome753.oneadapter.demo;
+package cc.rome753.demo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("cc.rome753.oneadapter.demo", appContext.getPackageName());
+        assertEquals("cc.rome753.demo", appContext.getPackageName());
     }
 }

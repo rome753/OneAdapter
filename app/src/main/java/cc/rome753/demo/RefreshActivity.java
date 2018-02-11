@@ -1,4 +1,4 @@
-package cc.rome753.oneadapter.demo;
+package cc.rome753.demo;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -13,8 +13,8 @@ import cc.rome753.oneadapter.R;
 import cc.rome753.oneadapter.base.OneAdapter;
 import cc.rome753.oneadapter.base.OneListener;
 import cc.rome753.oneadapter.base.OneViewHolder;
-import cc.rome753.oneadapter.base.refresh.LoadingLayout;
-import cc.rome753.oneadapter.base.refresh.RecyclerLayout;
+import cc.rome753.oneadapter.refresh.LoadingLayout;
+import cc.rome753.oneadapter.refresh.RecyclerLayout;
 
 public class RefreshActivity extends AppCompatActivity {
 
@@ -68,6 +68,8 @@ public class RefreshActivity extends AppCompatActivity {
         requestData();
     }
 
+    int page;
+
     private void requestData() {
         recyclerLayout.postDelayed(new Runnable() {
             @Override
@@ -79,14 +81,12 @@ public class RefreshActivity extends AppCompatActivity {
                     data.add(s);
                 }
 
-                recyclerLayout.setData(data, true);
                 page = 0;
+                recyclerLayout.setData(data, page++ < 2);
 
             }
         }, 1000);
     }
-
-    int page;
 
     private void requestMoreData() {
         recyclerLayout.postDelayed(new Runnable() {

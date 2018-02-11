@@ -1,4 +1,4 @@
-package cc.rome753.oneadapter.demo.model;
+package cc.rome753.demo.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;

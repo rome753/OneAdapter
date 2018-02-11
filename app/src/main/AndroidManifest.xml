@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".demo.MainActivity">
+        <activity android:name="cc.rome753.demo.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".demo.SimpleListActivity" />
-        <activity android:name=".demo.ComplexListActivity" />
-        <activity android:name=".demo.DataBindingActivity" />
-        <activity android:name=".demo.TwoTypeActivity" />
-        <activity android:name=".demo.HeaderFooterActivity" />
-        <activity android:name=".demo.RefreshActivity" />
+        <activity android:name="cc.rome753.demo.SimpleListActivity" />
+        <activity android:name="cc.rome753.demo.ComplexListActivity" />
+        <activity android:name="cc.rome753.demo.DataBindingActivity" />
+        <activity android:name="cc.rome753.demo.TwoTypeActivity" />
+        <activity android:name="cc.rome753.demo.HeaderFooterActivity" />
+        <activity android:name="cc.rome753.demo.RefreshActivity" />
     </application>
 
 </manifest>

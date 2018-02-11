@@ -1,4 +1,4 @@
-package cc.rome753.oneadapter.base.refresh;
+package cc.rome753.oneadapter.refresh;
 
 import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -42,7 +42,6 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
         loadingLayout = new LoadingLayout(context);
 
         gridLayoutManager = new GridLayoutManager(context, 1);
-
         recyclerView = new RecyclerView(context);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

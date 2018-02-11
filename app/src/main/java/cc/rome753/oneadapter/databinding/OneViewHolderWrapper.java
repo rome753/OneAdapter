@@ -1,4 +1,4 @@
-package cc.rome753.oneadapter.base.databinding;
+package cc.rome753.oneadapter.databinding;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;

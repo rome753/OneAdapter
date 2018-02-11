@@ -1,4 +1,4 @@
-package cc.rome753.oneadapter.demo;
+package cc.rome753.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
