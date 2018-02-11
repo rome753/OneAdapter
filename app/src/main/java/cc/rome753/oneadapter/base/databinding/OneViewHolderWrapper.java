@@ -1,9 +1,11 @@
-package cc.rome753.demo.oneadapter;
+package cc.rome753.oneadapter.base.databinding;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+
+import cc.rome753.oneadapter.base.OneViewHolder;
 
 /**
  * OneViewHolder's data binding wrapper
@@ -11,18 +13,18 @@ import android.view.ViewGroup;
  * @param <D> 数据类型
  * @param <B> ViewDataBinding类型
  */
-public abstract class OneViewHolderBinder<D,B extends ViewDataBinding>{
+public abstract class OneViewHolderWrapper<D,B extends ViewDataBinding>{
 
     private OneViewHolder<D> oneViewHolder;
 
     protected B binding;
 
-    public OneViewHolderBinder(ViewGroup parent, int layoutRes){
+    public OneViewHolderWrapper(ViewGroup parent, int layoutRes){
         binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), layoutRes, parent, false);
         oneViewHolder = new OneViewHolder<D>(binding.getRoot()) {
             @Override
-            public void bindView(int position, D d) {
-                bingingView(position, d);
+            protected void bindViewCasted(int position, D d) {
+                OneViewHolderWrapper.this.bindViewCasted(position, d);
             }
         };
     }
@@ -31,5 +33,5 @@ public abstract class OneViewHolderBinder<D,B extends ViewDataBinding>{
         return oneViewHolder;
     }
 
-    protected abstract void bingingView(int position, D d);
+    protected abstract void bindViewCasted(int position, D d);
 }

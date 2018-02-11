@@ -1,4 +1,4 @@
-package cc.rome753.demo.oneadapter;
+package cc.rome753.oneadapter.base;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,14 +20,19 @@ public abstract class OneViewHolder<D> extends RecyclerView.ViewHolder {
     }
 
     /**
-     * bindView之前对数据进行类型转换。如果当前位置数据不是T类型，会抛出ClassCastException
+     * bindView对数据进行类型转换
      * @param position 数据位置
      * @param o 数据
      * @throws ClassCastException 类型转换异常
      */
-    void bindViewCast(int position, Object o) throws ClassCastException{
-        bindView(position, (D) o);
+    void bindView(int position, Object o) throws ClassCastException{
+        bindViewCasted(position, (D) o);
     }
 
-    public abstract void bindView(int position, D d);
+    /**
+     * 绑定类型转换后数据到itemView上
+     * @param position 位置
+     * @param d 数据
+     */
+    protected abstract void bindViewCasted(int position, D d);
 }

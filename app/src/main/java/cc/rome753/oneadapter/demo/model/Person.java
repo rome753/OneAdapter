@@ -1,9 +1,9 @@
-package cc.rome753.demo;
+package cc.rome753.oneadapter.demo.model;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 
-import cc.rome753.demo.BR;
+import cc.rome753.oneadapter.BR;
 
 /**
  * Created by chao on 18-2-1.

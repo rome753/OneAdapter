@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "cc.rome753.demo"
+        applicationId "cc.rome753.oneadapter"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -19,6 +19,7 @@ android {
     dataBinding {
         enabled = true
     }
+    buildToolsVersion '26.0.2'
 }
 
 dependencies {

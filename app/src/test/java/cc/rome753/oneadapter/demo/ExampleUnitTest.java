@@ -1,4 +1,4 @@
-package cc.rome753.demo;
+package cc.rome753.oneadapter.demo;
 
 import org.junit.Test;
 

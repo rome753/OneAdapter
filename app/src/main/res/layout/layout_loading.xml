@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="48dp" />
+
+    <TextView
+        android:id="@+id/tv_no_more"
+        android:text="- no more -"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" />
+
+</FrameLayout>
