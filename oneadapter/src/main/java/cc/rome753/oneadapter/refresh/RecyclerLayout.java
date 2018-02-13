@@ -10,13 +10,12 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import cc.rome753.oneadapter.R;
 import cc.rome753.oneadapter.base.OneAdapter;
 import cc.rome753.oneadapter.base.OneListener;
 import cc.rome753.oneadapter.base.OneViewHolder;
 
 /**
- * Created by chao on 18-2-9.
+ * Created by rome753 on 18-2-9.
  */
 
 public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListener, LoadingLayout.OnLoadingListener {
@@ -36,7 +35,7 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
 
     public RecyclerLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setColorSchemeResources(R.color.colorPrimary);
+//        setColorSchemeResources(R.color.colorPrimary);
         setOnRefreshListener(this);
 
         loadingLayout = new LoadingLayout(context);

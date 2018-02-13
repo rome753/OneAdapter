@@ -71,7 +71,7 @@ public class RefreshActivity extends AppCompatActivity {
     int page;
 
     private void requestData() {
-        recyclerLayout.postDelayed(new Runnable() {
+        getWindow().getDecorView().postDelayed(new Runnable() {
             @Override
             public void run() {
 
@@ -89,7 +89,7 @@ public class RefreshActivity extends AppCompatActivity {
     }
 
     private void requestMoreData() {
-        recyclerLayout.postDelayed(new Runnable() {
+        getWindow().getDecorView().postDelayed(new Runnable() {
             @Override
             public void run() {
 

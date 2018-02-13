@@ -6,7 +6,7 @@ import android.databinding.Bindable;
 import cc.rome753.oneadapter.BR;
 
 /**
- * Created by chao on 18-2-1.
+ * Created by rome753 on 18-2-1.
  */
 
 public class Person extends BaseObservable{

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * RecyclerView.Adapter适配器的封装，支持多种ItemViewType
  *
- * Created by chao on 2018/2/1.
+ * Created by rome753 on 2018/2/1.
  */
 
 public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
