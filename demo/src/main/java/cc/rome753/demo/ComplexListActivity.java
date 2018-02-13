@@ -21,14 +21,14 @@ import cc.rome753.demo.model.Person;
 
 public class ComplexListActivity extends AppCompatActivity {
 
-    OneAdapter adapter;
+    OneAdapter oneAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adapter = new OneAdapter(
+        oneAdapter = new OneAdapter(
                 new OneListener() {
 
                     @Override
@@ -100,7 +100,7 @@ public class ComplexListActivity extends AppCompatActivity {
                 if(position > 10 && position < 26){
                     return 2;
                 }
-                if(adapter.getData().get(position) instanceof String){
+                if(oneAdapter.getData().get(position) instanceof String){
                     return 3;
                 }
                 return 6;
@@ -108,7 +108,7 @@ public class ComplexListActivity extends AppCompatActivity {
         });
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(gridLayoutManager);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(oneAdapter);
 
         requestData();
     }
@@ -124,7 +124,8 @@ public class ComplexListActivity extends AppCompatActivity {
         data.add(10, new Person("Chris", 10));
         data.add(11, new Person("Tom", 18));
         data.add(26, new Person("David", 3));
-        adapter.setData(data);
+        oneAdapter.setData(data);
+        oneAdapter.notifyDataSetChanged();
     }
 
 }

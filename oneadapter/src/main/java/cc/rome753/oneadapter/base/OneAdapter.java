@@ -8,34 +8,31 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * RecyclerView.Adapter适配器的封装，支持多种ItemViewType
- *
+ * A custom adapter, supports multi-ItemViewType
+ * <p>
  * Created by rome753 on 2018/2/1.
  */
-
 public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
     private final List<Object> data;
     private final List<OneListener> listeners;
 
-    public OneAdapter(OneListener... listeners){
+    public OneAdapter(OneListener... listeners) {
         this.data = new ArrayList<>();
         this.listeners = new ArrayList<>();
         this.listeners.addAll(Arrays.asList(listeners));
     }
 
-    public void setData(List<?> data){
+    public void setData(List<?> data) {
         this.data.clear();
         this.data.addAll(data);
-        notifyDataSetChanged();
     }
 
-    public void addData(List<?> data){
+    public void addData(List<?> data) {
         this.data.addAll(data);
-        notifyDataSetChanged();
     }
 
-    public List<Object> getData(){
+    public List<Object> getData() {
         return data;
     }
 
@@ -46,9 +43,9 @@ public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
     @Override
     public int getItemViewType(int position) {
         Object o = data.get(position);
-        for(int i = 0; i < listeners.size(); i++){
+        for (int i = 0; i < listeners.size(); i++) {
             OneListener listener = listeners.get(i);
-            if(listener.isMyItemViewType(position, o)){
+            if (listener.isMyItemViewType(position, o)) {
                 return i;
             }
         }

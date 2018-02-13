@@ -56,5 +56,6 @@ public class SimpleListActivity extends AppCompatActivity {
             data.add(" " + (char)i);
         }
         oneAdapter.setData(data);
+        oneAdapter.notifyDataSetChanged();
     }
 }

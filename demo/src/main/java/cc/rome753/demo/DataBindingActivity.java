@@ -59,5 +59,6 @@ public class DataBindingActivity extends AppCompatActivity {
             data.add(new Person("David", 36));
         }
         oneAdapter.setData(data);
+        oneAdapter.notifyDataSetChanged();
     }
 }

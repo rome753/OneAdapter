@@ -18,18 +18,18 @@ import cc.rome753.oneadapter.base.OneViewHolder;
 
 public class TwoTypeActivity extends AppCompatActivity {
 
-    OneAdapter adapter;
+    OneAdapter oneAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        adapter = new OneAdapter(new StringListener(), new LongListener());
+        oneAdapter = new OneAdapter(new StringListener(), new LongListener());
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(oneAdapter);
 
         requestData();
     }
@@ -42,7 +42,8 @@ public class TwoTypeActivity extends AppCompatActivity {
         for(int i = 3; i < 50; i += 6){
             data.add(i, System.nanoTime());
         }
-        adapter.setData(data);
+        oneAdapter.setData(data);
+        oneAdapter.notifyDataSetChanged();
     }
 
     static class StringViewHolder extends OneViewHolder<String>{

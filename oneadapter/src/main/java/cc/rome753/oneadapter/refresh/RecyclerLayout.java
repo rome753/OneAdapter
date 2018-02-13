@@ -35,7 +35,6 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
 
     public RecyclerLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-//        setColorSchemeResources(R.color.colorPrimary);
         setOnRefreshListener(this);
 
         loadingLayout = new LoadingLayout(context);
@@ -55,7 +54,7 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition == oneAdapter.getItemCount() - 1 - 1) {
-                    //加载更多
+                    // load more
                     onLoading();
                 }
             }
@@ -109,6 +108,7 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
     public void setData(List<?> data, boolean hasMore){
         data.add(null);
         oneAdapter.setData(data);
+        oneAdapter.notifyDataSetChanged();
 
         setRefreshing(false);
         setLoading(false, !hasMore);
@@ -121,6 +121,7 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
         }
         data.add(null);
         oneAdapter.addData(data);
+        oneAdapter.notifyDataSetChanged();
 
         setLoading(false, !hasMore);
     }

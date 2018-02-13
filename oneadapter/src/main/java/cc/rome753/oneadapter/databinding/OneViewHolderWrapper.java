@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import cc.rome753.oneadapter.base.OneViewHolder;
 
 /**
- * OneViewHolder's data binding wrapper
- * OneViewHolder的支持数据绑定的包装类
- * @param <D> 数据类型
- * @param <B> ViewDataBinding类型
+ * A wrapper of OneViewHolder, supports data binding
+ * @param <D> the type of the data
+ * @param <B> the type of the ViewDataBinding
  */
 public abstract class OneViewHolderWrapper<D,B extends ViewDataBinding>{
 

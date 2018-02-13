@@ -3,20 +3,20 @@ package cc.rome753.oneadapter.base;
 import android.view.ViewGroup;
 
 /**
- * 每种ItemViewType对应的Listener，监听OneAdapter判断ItemView类型和获取OneViewHolder
+ * A listener for: define item view type and create ViewHolder, outside of the adapter
  */
 public interface OneListener{
 
     /**
-     * 根据位置或数据判断是否创建本类型的OneViewHolder
-     * @param position 位置
-     * @param o 数据
+     * Is the position or the data suits for this OneListener?
+     * @param position the data's position int the list
+     * @param o the data
      * @return true/false
      */
     boolean isMyItemViewType(int position, Object o);
 
     /**
-     * 获取OneViewHolder
+     * Create a ViewHolder for this OneListener
      * @param parent RecyclerView
      * @return OneViewHolder
      */

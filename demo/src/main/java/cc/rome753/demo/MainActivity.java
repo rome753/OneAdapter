@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         data.add(DataBindingActivity.class);
         data.add(RefreshActivity.class);
         oneAdapter.setData(data);
+        oneAdapter.notifyDataSetChanged();
     }
 
 }

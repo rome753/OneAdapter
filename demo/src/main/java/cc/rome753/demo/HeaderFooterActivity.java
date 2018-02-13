@@ -103,5 +103,6 @@ public class HeaderFooterActivity extends AppCompatActivity {
         }
         data.add(null);
         oneAdapter.setData(data);
+        oneAdapter.notifyDataSetChanged();
     }
 }
