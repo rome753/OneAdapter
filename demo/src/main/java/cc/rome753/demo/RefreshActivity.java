@@ -3,6 +3,7 @@ package cc.rome753.demo;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -62,7 +63,13 @@ public class RefreshActivity extends AppCompatActivity {
                     }
                 }
         );
-
+        recyclerLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        recyclerLayout.setSpan(2, new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position % 3 == 0 ? 2 : 1;
+            }
+        });
 
         recyclerLayout.setRefreshing(true);
         requestData();

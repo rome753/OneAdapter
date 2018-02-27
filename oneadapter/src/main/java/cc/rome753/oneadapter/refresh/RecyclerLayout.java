@@ -1,6 +1,7 @@
 package cc.rome753.oneadapter.refresh;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.GridLayoutManager;
@@ -25,6 +26,7 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
 
     private OneAdapter oneAdapter;
     private GridLayoutManager gridLayoutManager;
+    private GridLayoutManager.SpanSizeLookup spanSizeLookup;
 
     private OnRefreshListener onRefreshListener;
     private LoadingLayout.OnLoadingListener onLoadingListener;
@@ -40,6 +42,18 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
         loadingLayout = new LoadingLayout(context);
 
         gridLayoutManager = new GridLayoutManager(context, 1);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                if(position == oneAdapter.getItemCount() - 1){
+                    return gridLayoutManager.getSpanCount();
+                }
+                if(spanSizeLookup != null){
+                    return spanSizeLookup.getSpanSize(position);
+                }
+                return 1;
+            }
+        });
         recyclerView = new RecyclerView(context);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -63,7 +77,13 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
         addView(recyclerView);
     }
 
-    public void init(final OneAdapter oneAdapter, OnRefreshListener onRefreshListener, LoadingLayout.OnLoadingListener onLoadingListener){
+    /**
+     * Init the RecyclerLayout, the onRefreshListener and the onLoadingListener can be null.
+     * @param oneAdapter adapter for the inner RecyclerView.
+     * @param onRefreshListener refresh listener, set null to disable refresh.
+     * @param onLoadingListener load more listener, set null to disable load more.
+     */
+    public void init(@NonNull final OneAdapter oneAdapter, OnRefreshListener onRefreshListener, LoadingLayout.OnLoadingListener onLoadingListener){
         this.recyclerView.setAdapter(oneAdapter);
         this.oneAdapter = oneAdapter;
         this.oneAdapter.getListeners().add(0, new OneListener() {
@@ -88,6 +108,16 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
         }
         this.onRefreshListener = onRefreshListener;
         this.onLoadingListener = onLoadingListener;
+    }
+
+    /**
+     * Set spanCount and spanSizeLookup for the GridLayoutManager, spanSizeLookup can be null.
+     * @param spanCount span count
+     * @param spanSizeLookup if you don't need, set null.
+     */
+    public void setSpan(int spanCount, GridLayoutManager.SpanSizeLookup spanSizeLookup){
+        gridLayoutManager.setSpanCount(spanCount);
+        this.spanSizeLookup = spanSizeLookup;
     }
 
     @Override
