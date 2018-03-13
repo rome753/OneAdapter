@@ -47,16 +47,17 @@ public class TwoTypeActivity extends AppCompatActivity {
     }
 
     static class StringViewHolder extends OneViewHolder<String>{
-
+        TextView text1;
+        ImageView icon;
         public StringViewHolder(ViewGroup parent, int layoutRes) {
             super(parent, layoutRes);
+            text1 = itemView.findViewById(android.R.id.text1);
+            icon = itemView.findViewById(android.R.id.icon);
         }
 
         @Override
         protected void bindViewCasted(int position, String s) {
-            TextView text1 = itemView.findViewById(android.R.id.text1);
             text1.setText(s);
-            ImageView icon = itemView.findViewById(android.R.id.icon);
             icon.setImageResource(R.mipmap.ic_launcher);
         }
     }

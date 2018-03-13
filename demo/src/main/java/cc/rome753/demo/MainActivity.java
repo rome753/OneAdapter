@@ -36,10 +36,16 @@ public class MainActivity extends AppCompatActivity {
             public OneViewHolder getMyViewHolder(ViewGroup parent) {
                 return new OneViewHolder<Class>(parent, R.layout.item_text){
 
+                    TextView textView;
+
+                    @Override
+                    protected void findView() {
+                        textView = itemView.findViewById(R.id.text);
+                    }
+
                     @Override
                     protected void bindViewCasted(int position, final Class clazz) {
-                        TextView text = itemView.findViewById(R.id.text);
-                        text.setText(clazz.getSimpleName());
+                        textView.setText(clazz.getSimpleName());
                         itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
