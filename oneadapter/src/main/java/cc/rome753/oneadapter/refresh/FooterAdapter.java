@@ -44,16 +44,17 @@ public class FooterAdapter extends OneAdapter {
 
     @Override
     public void setData(List<?> data) {
-        data.add(null);
-        super.setData(data);
+        mData.clear();
+        mData.addAll(data);
+        mData.add(null); // add null data for footer
     }
 
     @Override
     public void addData(List<?> data) {
-        if(!mData.isEmpty()){
+        if(!mData.isEmpty()){  // remove null data for footer
             mData.remove(mData.size() - 1);
         }
         mData.addAll(data);
-        mData.add(null);
+        mData.add(null); // add null data for footer
     }
 }
