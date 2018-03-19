@@ -7,13 +7,8 @@ import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
 
 import java.util.List;
-
-import cc.rome753.oneadapter.base.OneAdapter;
-import cc.rome753.oneadapter.base.OneListener;
-import cc.rome753.oneadapter.base.OneViewHolder;
 
 /**
  * Created by rome753 on 18-2-9.
@@ -24,7 +19,7 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
     private RecyclerView recyclerView;
     private LoadingLayout loadingLayout;
 
-    private OneAdapter oneAdapter;
+    private FooterAdapter oneAdapter;
     private GridLayoutManager gridLayoutManager;
     private GridLayoutManager.SpanSizeLookup spanSizeLookup;
 
@@ -79,29 +74,14 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
 
     /**
      * Init the RecyclerLayout, the onRefreshListener and the onLoadingListener can be null.
-     * @param oneAdapter adapter for the inner RecyclerView.
+     * @param footerAdapter adapter for the inner RecyclerView.
      * @param onRefreshListener refresh listener, set null to disable refresh.
      * @param onLoadingListener load more listener, set null to disable load more.
      */
-    public void init(@NonNull final OneAdapter oneAdapter, OnRefreshListener onRefreshListener, LoadingLayout.OnLoadingListener onLoadingListener){
+    public void init(@NonNull final FooterAdapter footerAdapter, OnRefreshListener onRefreshListener, LoadingLayout.OnLoadingListener onLoadingListener){
+        footerAdapter.setFooterView(loadingLayout);
+        this.oneAdapter = footerAdapter;
         this.recyclerView.setAdapter(oneAdapter);
-        this.oneAdapter = oneAdapter;
-        this.oneAdapter.getListeners().add(0, new OneListener() {
-            @Override
-            public boolean isMyItemViewType(int position, Object o) {
-                return position == oneAdapter.getItemCount() - 1;
-            }
-
-            @Override
-            public OneViewHolder getMyViewHolder(ViewGroup parent) {
-                return new OneViewHolder(loadingLayout) {
-                    @Override
-                    protected void bindViewCasted(int position, Object o) {
-                        //ignore
-                    }
-                };
-            }
-        });
 
         if(onRefreshListener == null){
             setEnabled(false);
@@ -122,7 +102,7 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
 
     @Override
     public void onRefresh() {
-        if(onRefreshListener != null){
+        if(onRefreshListener != null && !isLoading() ){
             onRefreshListener.onRefresh();
         }
     }
@@ -131,12 +111,11 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
     public void onLoading() {
         if(onLoadingListener != null && !isRefreshing() && !isLoading() && !isNoMore()){
             onLoadingListener.onLoading();
-            setLoading(true, isNoMore());
+            setLoading(true, false);
         }
     }
 
     public void setData(List<?> data, boolean hasMore){
-        data.add(null);
         oneAdapter.setData(data);
         oneAdapter.notifyDataSetChanged();
 
@@ -145,11 +124,6 @@ public class RecyclerLayout extends SwipeRefreshLayout implements OnRefreshListe
     }
 
     public void addData(List<?> data, boolean hasMore){
-        List<Object> cur = oneAdapter.getData();
-        if(!cur.isEmpty()){
-            cur.remove(cur.size() - 1);
-        }
-        data.add(null);
         oneAdapter.addData(data);
         oneAdapter.notifyDataSetChanged();
 

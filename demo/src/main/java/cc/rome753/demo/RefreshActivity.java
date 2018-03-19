@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cc.rome753.oneadapter.R;
-import cc.rome753.oneadapter.base.OneAdapter;
 import cc.rome753.oneadapter.base.OneListener;
 import cc.rome753.oneadapter.base.OneViewHolder;
+import cc.rome753.oneadapter.refresh.FooterAdapter;
 import cc.rome753.oneadapter.refresh.LoadingLayout;
 import cc.rome753.oneadapter.refresh.RecyclerLayout;
 
@@ -27,7 +27,7 @@ public class RefreshActivity extends AppCompatActivity {
         recyclerLayout = new RecyclerLayout(this);
         setContentView(recyclerLayout);
 
-        OneAdapter oneAdapter = new OneAdapter(
+        FooterAdapter oneAdapter = new FooterAdapter(
                 new OneListener() {
 
                     @Override
@@ -72,7 +72,7 @@ public class RefreshActivity extends AppCompatActivity {
         });
 
         recyclerLayout.setRefreshing(true);
-        requestData();
+        recyclerLayout.onRefresh();
     }
 
     int page;

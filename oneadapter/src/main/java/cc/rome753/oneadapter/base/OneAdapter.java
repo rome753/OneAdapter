@@ -14,37 +14,33 @@ import java.util.List;
  */
 public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
-    private final List<Object> data;
-    private final List<OneListener> listeners;
+    protected final List<Object> mData;
+    protected final List<OneListener> mListeners;
 
     public OneAdapter(OneListener... listeners) {
-        this.data = new ArrayList<>();
-        this.listeners = new ArrayList<>();
-        this.listeners.addAll(Arrays.asList(listeners));
+        mData = new ArrayList<>();
+        mListeners = new ArrayList<>();
+        mListeners.addAll(Arrays.asList(listeners));
     }
 
     public void setData(List<?> data) {
-        this.data.clear();
-        this.data.addAll(data);
+        mData.clear();
+        mData.addAll(data);
     }
 
     public void addData(List<?> data) {
-        this.data.addAll(data);
+        mData.addAll(data);
     }
 
     public List<Object> getData() {
-        return data;
-    }
-
-    public List<OneListener> getListeners() {
-        return listeners;
+        return mData;
     }
 
     @Override
     public int getItemViewType(int position) {
-        Object o = data.get(position);
-        for (int i = 0; i < listeners.size(); i++) {
-            OneListener listener = listeners.get(i);
+        Object o = mData.get(position);
+        for (int i = 0; i < mListeners.size(); i++) {
+            OneListener listener = mListeners.get(i);
             if (listener.isMyItemViewType(position, o)) {
                 return i;
             }
@@ -54,18 +50,18 @@ public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
     @Override
     public OneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return listeners.get(viewType).getMyViewHolder(parent);
+        return mListeners.get(viewType).getMyViewHolder(parent);
     }
 
     @Override
     public void onBindViewHolder(OneViewHolder holder, int position) {
-        Object o = data.get(position);
+        Object o = mData.get(position);
         holder.bindView(position, o);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return mData.size();
     }
 
 }
