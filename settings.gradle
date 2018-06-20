@@ -1,1 +1,1 @@
-include ':demo', ':oneadapter'
+include ':demo', ':oneadapter', ':archdemo'
