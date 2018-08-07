@@ -72,7 +72,7 @@ public class RefreshActivity extends AppCompatActivity {
         });
 
         recyclerLayout.setRefreshing(true);
-        recyclerLayout.onRefresh();
+        requestData();
     }
 
     int page;

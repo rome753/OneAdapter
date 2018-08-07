@@ -13,16 +13,16 @@ public abstract class OneViewHolder<D> extends RecyclerView.ViewHolder {
 
     public OneViewHolder(View itemView) {
         super(itemView);
-        findView();
+        init();
     }
 
     public OneViewHolder(ViewGroup parent, int layoutRes) {
         super(LayoutInflater.from(parent.getContext()).inflate(layoutRes, parent, false));
-        findView();
+        init();
     }
 
-    protected void findView(){
-        // findViewById
+    protected void init(){
+        // findViewById if need.
     }
 
     void bindView(int position, Object o){

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
                             TextView tvName;
                             @Override
-                            protected void findView() {
+                            protected void init() {
                                 tvName = itemView.findViewById(android.R.id.text1);
                             }
 

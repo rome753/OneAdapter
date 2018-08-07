@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                     TextView textView;
 
                     @Override
-                    protected void findView() {
+                    protected void init() {
                         textView = itemView.findViewById(R.id.text);
                     }
 
