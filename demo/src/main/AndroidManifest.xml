@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cc.rome753.oneadapter">
+    package="cc.rome753.oneadapter.demo">
 
     <application
         android:allowBackup="true"
@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="cc.rome753.demo.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="cc.rome753.demo.SimpleListActivity" />
-        <activity android:name="cc.rome753.demo.ComplexListActivity" />
-        <activity android:name="cc.rome753.demo.DataBindingActivity" />
-        <activity android:name="cc.rome753.demo.TwoTypeActivity" />
-        <activity android:name="cc.rome753.demo.HeaderFooterActivity" />
-        <activity android:name="cc.rome753.demo.RefreshActivity" />
+        <activity android:name=".SimpleListActivity" />
+        <activity android:name=".ComplexListActivity" />
+        <activity android:name=".DataBindingActivity" />
+        <activity android:name=".TwoTypeActivity" />
+        <activity android:name=".HeaderFooterActivity" />
+        <activity android:name=".RefreshActivity" />
     </application>
 
 </manifest>

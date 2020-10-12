@@ -1,21 +1,22 @@
-package cc.rome753.demo;
+package cc.rome753.oneadapter.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.rome753.oneadapter.R;
+import cc.rome753.demo.model.Person;
 import cc.rome753.oneadapter.base.OneAdapter;
 import cc.rome753.oneadapter.base.OneListener;
 import cc.rome753.oneadapter.base.OneViewHolder;
+import cc.rome753.oneadapter.databinding.OneViewHolderWrapper;
+import cc.rome753.oneadapter.demo.databinding.ItemPersonBinding;
 
-public class SimpleListActivity extends AppCompatActivity {
+public class DataBindingActivity extends AppCompatActivity {
 
     OneAdapter oneAdapter;
 
@@ -32,14 +33,13 @@ public class SimpleListActivity extends AppCompatActivity {
 
             @Override
             public OneViewHolder getMyViewHolder(ViewGroup parent) {
-                return new OneViewHolder<String>(parent, R.layout.item_text){
-
+                return new OneViewHolderWrapper<Person, ItemPersonBinding>(parent, R.layout.item_person) {
                     @Override
-                    protected void bindViewCasted(int position, String s) {
-                        TextView text = itemView.findViewById(R.id.text);
-                        text.setText(s);
+                    protected void bindViewCasted(int position, Person person) {
+                        binding.setPerson(person);
+                        binding.executePendingBindings();
                     }
-                };
+                }.getOneViewHolder();
             }
         });
 
@@ -51,9 +51,11 @@ public class SimpleListActivity extends AppCompatActivity {
     }
 
     private void requestData() {
-        List<String> data = new ArrayList<>();
-        for(int i = 'A'; i <= 'z'; i++) {
-            data.add(" " + (char)i);
+        List<Object> data = new ArrayList<>();
+        for(int i = 0; i <= 10; i++) {
+            data.add(new Person("Bill", 22));
+            data.add(new Person("Chris", 10));
+            data.add(new Person("David", 36));
         }
         oneAdapter.setData(data);
         oneAdapter.notifyDataSetChanged();

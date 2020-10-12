@@ -1,23 +1,22 @@
-package cc.rome753.demo;
+package cc.rome753.oneadapter.demo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.rome753.oneadapter.R;
 import cc.rome753.oneadapter.base.OneAdapter;
 import cc.rome753.oneadapter.base.OneListener;
 import cc.rome753.oneadapter.base.OneViewHolder;
-import cc.rome753.oneadapter.databinding.OneViewHolderWrapper;
-import cc.rome753.oneadapter.databinding.ItemPersonBinding;
-import cc.rome753.demo.model.Person;
 
-public class DataBindingActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     OneAdapter oneAdapter;
 
@@ -34,13 +33,26 @@ public class DataBindingActivity extends AppCompatActivity {
 
             @Override
             public OneViewHolder getMyViewHolder(ViewGroup parent) {
-                return new OneViewHolderWrapper<Person, ItemPersonBinding>(parent, R.layout.item_person) {
+                return new OneViewHolder<Class>(parent, R.layout.item_text){
+
+                    TextView textView;
+
                     @Override
-                    protected void bindViewCasted(int position, Person person) {
-                        binding.setPerson(person);
-                        binding.executePendingBindings();
+                    protected void init() {
+                        textView = itemView.findViewById(R.id.text);
                     }
-                }.getOneViewHolder();
+
+                    @Override
+                    protected void bindViewCasted(int position, final Class clazz) {
+                        textView.setText(clazz.getSimpleName());
+                        itemView.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                startActivity(new Intent(MainActivity.this, clazz));
+                            }
+                        });
+                    }
+                };
             }
         });
 
@@ -53,12 +65,14 @@ public class DataBindingActivity extends AppCompatActivity {
 
     private void requestData() {
         List<Object> data = new ArrayList<>();
-        for(int i = 0; i <= 10; i++) {
-            data.add(new Person("Bill", 22));
-            data.add(new Person("Chris", 10));
-            data.add(new Person("David", 36));
-        }
+        data.add(SimpleListActivity.class);
+        data.add(TwoTypeActivity.class);
+        data.add(HeaderFooterActivity.class);
+        data.add(ComplexListActivity.class);
+        data.add(DataBindingActivity.class);
+        data.add(RefreshActivity.class);
         oneAdapter.setData(data);
         oneAdapter.notifyDataSetChanged();
     }
+
 }

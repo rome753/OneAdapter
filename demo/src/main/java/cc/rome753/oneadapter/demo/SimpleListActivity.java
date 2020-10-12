@@ -1,23 +1,20 @@
-package cc.rome753.demo;
+package cc.rome753.oneadapter.demo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.rome753.oneadapter.R;
 import cc.rome753.oneadapter.base.OneAdapter;
 import cc.rome753.oneadapter.base.OneListener;
 import cc.rome753.oneadapter.base.OneViewHolder;
 
-public class MainActivity extends AppCompatActivity {
+public class SimpleListActivity extends AppCompatActivity {
 
     OneAdapter oneAdapter;
 
@@ -34,24 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public OneViewHolder getMyViewHolder(ViewGroup parent) {
-                return new OneViewHolder<Class>(parent, R.layout.item_text){
-
-                    TextView textView;
+                return new OneViewHolder<String>(parent, R.layout.item_text){
 
                     @Override
-                    protected void init() {
-                        textView = itemView.findViewById(R.id.text);
-                    }
-
-                    @Override
-                    protected void bindViewCasted(int position, final Class clazz) {
-                        textView.setText(clazz.getSimpleName());
-                        itemView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                startActivity(new Intent(MainActivity.this, clazz));
-                            }
-                        });
+                    protected void bindViewCasted(int position, String s) {
+                        TextView text = itemView.findViewById(R.id.text);
+                        text.setText(s);
                     }
                 };
             }
@@ -65,15 +50,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestData() {
-        List<Object> data = new ArrayList<>();
-        data.add(SimpleListActivity.class);
-        data.add(TwoTypeActivity.class);
-        data.add(HeaderFooterActivity.class);
-        data.add(ComplexListActivity.class);
-        data.add(DataBindingActivity.class);
-        data.add(RefreshActivity.class);
+        List<String> data = new ArrayList<>();
+        for(int i = 'A'; i <= 'z'; i++) {
+            data.add(" " + (char)i);
+        }
         oneAdapter.setData(data);
         oneAdapter.notifyDataSetChanged();
     }
-
 }

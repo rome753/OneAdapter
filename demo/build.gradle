@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "cc.rome753.oneadapter"
+        applicationId "cc.rome753.oneadapter.demo"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1

@@ -1,4 +1,4 @@
-package cc.rome753.demo;
+package cc.rome753.oneadapter.demo;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.rome753.oneadapter.R;
 import cc.rome753.oneadapter.base.OneListener;
 import cc.rome753.oneadapter.base.OneViewHolder;
 import cc.rome753.oneadapter.refresh.FooterAdapter;

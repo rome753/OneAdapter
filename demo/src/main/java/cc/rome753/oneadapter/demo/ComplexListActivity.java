@@ -1,4 +1,4 @@
-package cc.rome753.demo;
+package cc.rome753.oneadapter.demo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,13 +11,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.rome753.oneadapter.R;
+import cc.rome753.demo.model.Person;
 import cc.rome753.oneadapter.base.OneAdapter;
 import cc.rome753.oneadapter.base.OneListener;
 import cc.rome753.oneadapter.base.OneViewHolder;
 import cc.rome753.oneadapter.databinding.OneViewHolderWrapper;
-import cc.rome753.oneadapter.databinding.ItemPersonBinding;
-import cc.rome753.demo.model.Person;
+import cc.rome753.oneadapter.demo.databinding.ItemPersonBinding;
 
 public class ComplexListActivity extends AppCompatActivity {
 
