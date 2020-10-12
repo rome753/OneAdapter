@@ -28,7 +28,7 @@ public abstract class OneViewHolderWrapper<D,B extends ViewDataBinding>{
         };
     }
 
-    public OneViewHolder<D> getOneViewHolder() {
+    public OneViewHolder<D> asOneViewHolder() {
         return oneViewHolder;
     }
 

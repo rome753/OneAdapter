@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cc.rome753.oneadapter.base.OneAdapter;
-import cc.rome753.oneadapter.base.OneListener;
+import cc.rome753.oneadapter.base.OneTemplate;
 import cc.rome753.oneadapter.base.OneViewHolder;
 
 public class HeaderFooterActivity extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         oneAdapter = new OneAdapter(
-                new OneListener() {
+                new OneTemplate() {
                     @Override
                     public boolean isMyItemViewType(int position, Object o) {
                         return position == 0;
@@ -45,7 +45,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
                         };
                     }
                 },
-                new OneListener() {
+                new OneTemplate() {
                     @Override
                     public boolean isMyItemViewType(int position, Object o) {
                         return o instanceof String;
@@ -63,7 +63,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
                         };
                     }
                 },
-                new OneListener() {
+                new OneTemplate() {
                     @Override
                     public boolean isMyItemViewType(int position, Object o) {
                         return position == oneAdapter.getItemCount() - 1;

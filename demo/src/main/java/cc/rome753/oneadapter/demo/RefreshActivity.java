@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import cc.rome753.oneadapter.base.OneListener;
+import cc.rome753.oneadapter.base.OneTemplate;
 import cc.rome753.oneadapter.base.OneViewHolder;
 import cc.rome753.oneadapter.refresh.FooterAdapter;
 import cc.rome753.oneadapter.refresh.LoadingLayout;
@@ -27,7 +27,7 @@ public class RefreshActivity extends AppCompatActivity {
         setContentView(recyclerLayout);
 
         FooterAdapter oneAdapter = new FooterAdapter(
-                new OneListener() {
+                new OneTemplate() {
 
                     @Override
                     public boolean isMyItemViewType(int position, Object o) {

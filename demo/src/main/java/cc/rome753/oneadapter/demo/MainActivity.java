@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cc.rome753.oneadapter.base.OneAdapter;
-import cc.rome753.oneadapter.base.OneListener;
+import cc.rome753.oneadapter.base.OneTemplate;
 import cc.rome753.oneadapter.base.OneViewHolder;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(new OneListener() {
+        oneAdapter = new OneAdapter(new OneTemplate() {
             @Override
             public boolean isMyItemViewType(int position, Object o) {
                 return true;

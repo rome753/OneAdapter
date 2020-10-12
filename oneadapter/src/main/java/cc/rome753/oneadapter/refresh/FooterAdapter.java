@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import cc.rome753.oneadapter.base.OneAdapter;
-import cc.rome753.oneadapter.base.OneListener;
+import cc.rome753.oneadapter.base.OneTemplate;
 import cc.rome753.oneadapter.base.OneViewHolder;
 
 /**
@@ -22,9 +22,9 @@ public class FooterAdapter extends OneAdapter {
         this.footerView = footerView;
     }
 
-    public FooterAdapter(OneListener... oneListeners) {
-        super(oneListeners);
-        mListeners.add(0, new OneListener() {
+    public FooterAdapter(OneTemplate... oneTemplates) {
+        super(oneTemplates);
+        mListeners.add(0, new OneTemplate() {
             @Override
             public boolean isMyItemViewType(int position, Object o) {
                 return position == getItemCount() - 1;

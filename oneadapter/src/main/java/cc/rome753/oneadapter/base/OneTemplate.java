@@ -3,12 +3,12 @@ package cc.rome753.oneadapter.base;
 import android.view.ViewGroup;
 
 /**
- * A listener for: define item view type and create ViewHolder, outside of the adapter
+ * A template for: define item view type and create ViewHolder, outside of the adapter
  */
-public interface OneListener{
+public interface OneTemplate {
 
     /**
-     * Is the position or the data suits for this OneListener?
+     * Is the position or the data suits for this OneTemplate?
      * @param position the data's position int the list
      * @param o the data
      * @return true/false
@@ -16,7 +16,7 @@ public interface OneListener{
     boolean isMyItemViewType(int position, Object o);
 
     /**
-     * Create a ViewHolder for this OneListener
+     * Create a ViewHolder for this OneTemplate
      * @param parent RecyclerView
      * @return OneViewHolder
      */

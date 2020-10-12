@@ -11,7 +11,7 @@ import java.util.List;
 
 import cc.rome753.demo.model.Person;
 import cc.rome753.oneadapter.base.OneAdapter;
-import cc.rome753.oneadapter.base.OneListener;
+import cc.rome753.oneadapter.base.OneTemplate;
 import cc.rome753.oneadapter.base.OneViewHolder;
 import cc.rome753.oneadapter.databinding.OneViewHolderWrapper;
 import cc.rome753.oneadapter.demo.databinding.ItemPersonBinding;
@@ -25,7 +25,7 @@ public class DataBindingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(new OneListener() {
+        oneAdapter = new OneAdapter(new OneTemplate() {
             @Override
             public boolean isMyItemViewType(int position, Object o) {
                 return true;
@@ -39,7 +39,7 @@ public class DataBindingActivity extends AppCompatActivity {
                         binding.setPerson(person);
                         binding.executePendingBindings();
                     }
-                }.getOneViewHolder();
+                }.asOneViewHolder();
             }
         });
 

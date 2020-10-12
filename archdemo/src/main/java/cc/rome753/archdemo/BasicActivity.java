@@ -1,24 +1,18 @@
 package cc.rome753.archdemo;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import cc.rome753.oneadapter.base.OneAdapter;
-import cc.rome753.oneadapter.base.OneListener;
+import cc.rome753.oneadapter.base.OneTemplate;
 import cc.rome753.oneadapter.base.OneViewHolder;
 import cc.rome753.oneadapter.refresh.FooterAdapter;
 import cc.rome753.oneadapter.refresh.LoadingLayout;
@@ -36,7 +30,7 @@ public class BasicActivity extends AppCompatActivity {
         setContentView(recyclerLayout);
 
         FooterAdapter oneAdapter = new FooterAdapter(
-                new OneListener() {
+                new OneTemplate() {
 
                     @Override
                     public boolean isMyItemViewType(int position, Object o) {

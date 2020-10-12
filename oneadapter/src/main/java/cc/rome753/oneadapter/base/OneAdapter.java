@@ -15,9 +15,9 @@ import java.util.List;
 public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
     protected final List<Object> mData;
-    protected final List<OneListener> mListeners;
+    protected final List<OneTemplate> mListeners;
 
-    public OneAdapter(OneListener... listeners) {
+    public OneAdapter(OneTemplate... listeners) {
         mData = new ArrayList<>();
         mListeners = new ArrayList<>();
         mListeners.addAll(Arrays.asList(listeners));
@@ -40,7 +40,7 @@ public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
     public int getItemViewType(int position) {
         Object o = mData.get(position);
         for (int i = 0; i < mListeners.size(); i++) {
-            OneListener listener = mListeners.get(i);
+            OneTemplate listener = mListeners.get(i);
             if (listener.isMyItemViewType(position, o)) {
                 return i;
             }

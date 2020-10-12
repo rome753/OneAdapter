@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cc.rome753.oneadapter.base.OneAdapter;
-import cc.rome753.oneadapter.base.OneListener;
+import cc.rome753.oneadapter.base.OneTemplate;
 import cc.rome753.oneadapter.base.OneViewHolder;
 
 public class TwoTypeActivity extends AppCompatActivity {
@@ -24,7 +24,7 @@ public class TwoTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(new StringListener(), new LongListener());
+        oneAdapter = new OneAdapter(new StringTemplate(), new LongTemplate());
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -61,7 +61,7 @@ public class TwoTypeActivity extends AppCompatActivity {
         }
     }
 
-    static class StringListener implements OneListener{
+    static class StringTemplate implements OneTemplate {
 
         @Override
         public boolean isMyItemViewType(int position, Object o) {
@@ -87,7 +87,7 @@ public class TwoTypeActivity extends AppCompatActivity {
         }
     }
 
-    static class LongListener implements OneListener{
+    static class LongTemplate implements OneTemplate {
 
         @Override
         public boolean isMyItemViewType(int position, Object o) {
