@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(new OneTemplate() {
+        oneAdapter = new OneAdapter().register(new OneTemplate() {
             @Override
             public boolean isMyItemViewType(int position, Object o) {
                 return true;

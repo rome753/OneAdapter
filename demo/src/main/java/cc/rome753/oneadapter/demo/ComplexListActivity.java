@@ -27,7 +27,8 @@ public class ComplexListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(
+        oneAdapter = new OneAdapter();
+        oneAdapter.register(
                 new OneTemplate() {
 
                     @Override
@@ -46,60 +47,62 @@ public class ComplexListActivity extends AppCompatActivity {
                             }
                         };
                     }
-                },
-                new OneTemplate() {
+                })
+                .register(
+                        new OneTemplate() {
 
-                    @Override
-                    public boolean isMyItemViewType(int position, Object o) {
-                        return o instanceof String;
-                    }
-
-                    @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
-
-                        return new OneViewHolder<String>(parent, android.R.layout.activity_list_item) {
                             @Override
-                            protected void bindViewCasted(int position, String s) {
-                                TextView text1 = itemView.findViewById(android.R.id.text1);
-                                text1.setText(s);
-                                ImageView icon = itemView.findViewById(android.R.id.icon);
-                                icon.setImageResource(R.mipmap.ic_launcher);
+                            public boolean isMyItemViewType(int position, Object o) {
+                                return o instanceof String;
                             }
-                        };
-                    }
-                },
-                new OneTemplate() {
 
-                    @Override
-                    public boolean isMyItemViewType(int position, Object o) {
-                        return o instanceof Person;
-                    }
-
-                    @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
-
-                        return new OneViewHolderWrapper<Person, ItemPersonBinding>(parent, R.layout.item_person) {
                             @Override
-                            protected void bindViewCasted(int position, Person o) {
-                                binding.setPerson(o);
-                                binding.executePendingBindings();
+                            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+
+                                return new OneViewHolder<String>(parent, android.R.layout.activity_list_item) {
+                                    @Override
+                                    protected void bindViewCasted(int position, String s) {
+                                        TextView text1 = itemView.findViewById(android.R.id.text1);
+                                        text1.setText(s);
+                                        ImageView icon = itemView.findViewById(android.R.id.icon);
+                                        icon.setImageResource(R.mipmap.ic_launcher);
+                                    }
+                                };
                             }
-                        }.asOneViewHolder();
-                    }
-                }
-        );
+                        })
+                .register(
+                        new OneTemplate() {
+
+                            @Override
+                            public boolean isMyItemViewType(int position, Object o) {
+                                return o instanceof Person;
+                            }
+
+                            @Override
+                            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+
+                                return new OneViewHolderWrapper<Person, ItemPersonBinding>(parent, R.layout.item_person) {
+                                    @Override
+                                    protected void bindViewCasted(int position, Person o) {
+                                        binding.setPerson(o);
+                                        binding.executePendingBindings();
+                                    }
+                                }.asOneViewHolder();
+                            }
+                        }
+                );
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if(position == 10 || position == 11){
+                if (position == 10 || position == 11) {
                     return 3;
                 }
-                if(position > 10 && position < 26){
+                if (position > 10 && position < 26) {
                     return 2;
                 }
-                if(oneAdapter.getData().get(position) instanceof String){
+                if (oneAdapter.getData().get(position) instanceof String) {
                     return 3;
                 }
                 return 6;
@@ -114,11 +117,11 @@ public class ComplexListActivity extends AppCompatActivity {
 
     private void requestData() {
         List<Object> data = new ArrayList<>();
-        for(int i = 'A'; i <= 'z'; i++){
-            String s = (char)i + "";
+        for (int i = 'A'; i <= 'z'; i++) {
+            String s = (char) i + "";
             data.add(s);
         }
-        data.add(1,null);
+        data.add(1, null);
         data.add(3, new Person("Bill", 22));
         data.add(10, new Person("Chris", 10));
         data.add(11, new Person("Tom", 18));

@@ -24,7 +24,9 @@ public class TwoTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(new StringTemplate(), new LongTemplate());
+        oneAdapter = new OneAdapter()
+                .register(new StringTemplate())
+                .register(new LongTemplate());
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

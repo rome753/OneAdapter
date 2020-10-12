@@ -26,7 +26,8 @@ public class HeaderFooterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(
+        oneAdapter = new OneAdapter();
+        oneAdapter.register(
                 new OneTemplate() {
                     @Override
                     public boolean isMyItemViewType(int position, Object o) {
@@ -44,42 +45,44 @@ public class HeaderFooterActivity extends AppCompatActivity {
                             }
                         };
                     }
-                },
-                new OneTemplate() {
-                    @Override
-                    public boolean isMyItemViewType(int position, Object o) {
-                        return o instanceof String;
-                    }
-
-                    @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
-                        return new OneViewHolder<String>(parent, android.R.layout.simple_list_item_1) {
+                })
+                .register(
+                        new OneTemplate() {
+                            @Override
+                            public boolean isMyItemViewType(int position, Object o) {
+                                return o instanceof String;
+                            }
 
                             @Override
-                            protected void bindViewCasted(int position, String s) {
-                                TextView text = itemView.findViewById(android.R.id.text1);
-                                text.setText(s);
-                            }
-                        };
-                    }
-                },
-                new OneTemplate() {
-                    @Override
-                    public boolean isMyItemViewType(int position, Object o) {
-                        return position == oneAdapter.getItemCount() - 1;
-                    }
+                            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                                return new OneViewHolder<String>(parent, android.R.layout.simple_list_item_1) {
 
-                    @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
-                        return new OneViewHolder<Object>(footerView) {
+                                    @Override
+                                    protected void bindViewCasted(int position, String s) {
+                                        TextView text = itemView.findViewById(android.R.id.text1);
+                                        text.setText(s);
+                                    }
+                                };
+                            }
+                        })
+                .register(
+                        new OneTemplate() {
+                            @Override
+                            public boolean isMyItemViewType(int position, Object o) {
+                                return position == oneAdapter.getItemCount() - 1;
+                            }
 
                             @Override
-                            protected void bindViewCasted(int position, Object o) {
+                            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                                return new OneViewHolder<Object>(footerView) {
+
+                                    @Override
+                                    protected void bindViewCasted(int position, Object o) {
+                                    }
+                                };
                             }
-                        };
-                    }
-                }
-        );
+                        }
+                );
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -91,7 +94,7 @@ public class HeaderFooterActivity extends AppCompatActivity {
 
     private void initFooterView() {
         footerView = LayoutInflater.from(this).inflate(R.layout.item_text, recyclerView, false);
-        ((TextView)footerView.findViewById(R.id.text)).setText("This is footer");
+        ((TextView) footerView.findViewById(R.id.text)).setText("This is footer");
     }
 
     private void requestData() {

@@ -4,7 +4,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,12 +14,16 @@ import java.util.List;
 public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
     protected final List<Object> mData;
-    protected final List<OneTemplate> mListeners;
+    protected final List<OneTemplate> mTemplates;
 
-    public OneAdapter(OneTemplate... listeners) {
+    public OneAdapter() {
         mData = new ArrayList<>();
-        mListeners = new ArrayList<>();
-        mListeners.addAll(Arrays.asList(listeners));
+        mTemplates = new ArrayList<>();
+    }
+
+    public OneAdapter register(OneTemplate oneTemplate) {
+        mTemplates.add(oneTemplate);
+        return this;
     }
 
     public void setData(List<?> data) {
@@ -39,8 +42,8 @@ public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
     @Override
     public int getItemViewType(int position) {
         Object o = mData.get(position);
-        for (int i = 0; i < mListeners.size(); i++) {
-            OneTemplate listener = mListeners.get(i);
+        for (int i = 0; i < mTemplates.size(); i++) {
+            OneTemplate listener = mTemplates.get(i);
             if (listener.isMyItemViewType(position, o)) {
                 return i;
             }
@@ -50,7 +53,7 @@ public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
     @Override
     public OneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return mListeners.get(viewType).getMyViewHolder(parent);
+        return mTemplates.get(viewType).getMyViewHolder(parent);
     }
 
     @Override

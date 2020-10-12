@@ -22,9 +22,9 @@ public class FooterAdapter extends OneAdapter {
         this.footerView = footerView;
     }
 
-    public FooterAdapter(OneTemplate... oneTemplates) {
-        super(oneTemplates);
-        mListeners.add(0, new OneTemplate() {
+    public FooterAdapter() {
+        super();
+        mTemplates.add(0, new OneTemplate() {
             @Override
             public boolean isMyItemViewType(int position, Object o) {
                 return position == getItemCount() - 1;

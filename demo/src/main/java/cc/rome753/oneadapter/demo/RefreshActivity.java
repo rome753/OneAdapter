@@ -26,7 +26,8 @@ public class RefreshActivity extends AppCompatActivity {
         recyclerLayout = new RecyclerLayout(this);
         setContentView(recyclerLayout);
 
-        FooterAdapter oneAdapter = new FooterAdapter(
+        FooterAdapter oneAdapter = new FooterAdapter();
+        oneAdapter.register(
                 new OneTemplate() {
 
                     @Override
