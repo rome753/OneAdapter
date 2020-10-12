@@ -32,12 +32,12 @@ public class ComplexListActivity extends AppCompatActivity {
                 new OneTemplate() {
 
                     @Override
-                    public boolean isMyItemViewType(int position, Object o) {
+                    public boolean isMatch(int position, Object o) {
                         return position > 30;
                     }
 
                     @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                    public OneViewHolder getViewHolder(ViewGroup parent) {
 
                         return new OneViewHolder<String>(parent, R.layout.item_text) {
                             @Override
@@ -52,12 +52,12 @@ public class ComplexListActivity extends AppCompatActivity {
                         new OneTemplate() {
 
                             @Override
-                            public boolean isMyItemViewType(int position, Object o) {
+                            public boolean isMatch(int position, Object o) {
                                 return o instanceof String;
                             }
 
                             @Override
-                            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                            public OneViewHolder getViewHolder(ViewGroup parent) {
 
                                 return new OneViewHolder<String>(parent, android.R.layout.activity_list_item) {
                                     @Override
@@ -74,12 +74,12 @@ public class ComplexListActivity extends AppCompatActivity {
                         new OneTemplate() {
 
                             @Override
-                            public boolean isMyItemViewType(int position, Object o) {
+                            public boolean isMatch(int position, Object o) {
                                 return o instanceof Person;
                             }
 
                             @Override
-                            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                            public OneViewHolder getViewHolder(ViewGroup parent) {
 
                                 return new OneViewHolderWrapper<Person, ItemPersonBinding>(parent, R.layout.item_person) {
                                     @Override

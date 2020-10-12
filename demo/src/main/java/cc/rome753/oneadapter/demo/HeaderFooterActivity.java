@@ -30,12 +30,12 @@ public class HeaderFooterActivity extends AppCompatActivity {
         oneAdapter.register(
                 new OneTemplate() {
                     @Override
-                    public boolean isMyItemViewType(int position, Object o) {
+                    public boolean isMatch(int position, Object o) {
                         return position == 0;
                     }
 
                     @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                    public OneViewHolder getViewHolder(ViewGroup parent) {
                         return new OneViewHolder<Object>(parent, R.layout.item_text) {
 
                             @Override
@@ -49,12 +49,12 @@ public class HeaderFooterActivity extends AppCompatActivity {
                 .register(
                         new OneTemplate() {
                             @Override
-                            public boolean isMyItemViewType(int position, Object o) {
+                            public boolean isMatch(int position, Object o) {
                                 return o instanceof String;
                             }
 
                             @Override
-                            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                            public OneViewHolder getViewHolder(ViewGroup parent) {
                                 return new OneViewHolder<String>(parent, android.R.layout.simple_list_item_1) {
 
                                     @Override
@@ -68,12 +68,12 @@ public class HeaderFooterActivity extends AppCompatActivity {
                 .register(
                         new OneTemplate() {
                             @Override
-                            public boolean isMyItemViewType(int position, Object o) {
+                            public boolean isMatch(int position, Object o) {
                                 return position == oneAdapter.getItemCount() - 1;
                             }
 
                             @Override
-                            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                            public OneViewHolder getViewHolder(ViewGroup parent) {
                                 return new OneViewHolder<Object>(footerView) {
 
                                     @Override

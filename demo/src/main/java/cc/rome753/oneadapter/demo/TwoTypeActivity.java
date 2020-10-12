@@ -66,12 +66,12 @@ public class TwoTypeActivity extends AppCompatActivity {
     static class StringTemplate implements OneTemplate {
 
         @Override
-        public boolean isMyItemViewType(int position, Object o) {
+        public boolean isMatch(int position, Object o) {
             return o instanceof String;
         }
 
         @Override
-        public OneViewHolder getMyViewHolder(ViewGroup parent) {
+        public OneViewHolder getViewHolder(ViewGroup parent) {
             return new StringViewHolder(parent, android.R.layout.activity_list_item);
         }
     }
@@ -92,12 +92,12 @@ public class TwoTypeActivity extends AppCompatActivity {
     static class LongTemplate implements OneTemplate {
 
         @Override
-        public boolean isMyItemViewType(int position, Object o) {
+        public boolean isMatch(int position, Object o) {
             return o instanceof Long;
         }
 
         @Override
-        public OneViewHolder getMyViewHolder(ViewGroup parent) {
+        public OneViewHolder getViewHolder(ViewGroup parent) {
             return new LongViewHolder(parent, R.layout.item_text);
         }
     }

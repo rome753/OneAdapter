@@ -27,12 +27,12 @@ public class DataBindingActivity extends AppCompatActivity {
 
         oneAdapter = new OneAdapter().register(new OneTemplate() {
             @Override
-            public boolean isMyItemViewType(int position, Object o) {
+            public boolean isMatch(int position, Object o) {
                 return true;
             }
 
             @Override
-            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+            public OneViewHolder getViewHolder(ViewGroup parent) {
                 return new OneViewHolderWrapper<Person, ItemPersonBinding>(parent, R.layout.item_person) {
                     @Override
                     protected void bindViewCasted(int position, Person person) {

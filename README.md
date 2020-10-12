@@ -7,45 +7,41 @@ One is All.
 ## code
 
 OneAdapter
+
 ```java
-/**
- * A custom adapter, supports multi-ItemViewType
- * <p>
- * Created by rome753 on 2018/2/1.
- */
 public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
-    private final List<Object> data;
-    private final List<OneListener> listeners;
+    protected final List<Object> mData;
+    protected final List<OneTemplate> mTemplates;
 
-    public OneAdapter(OneListener... listeners) {
-        this.data = new ArrayList<>();
-        this.listeners = new ArrayList<>();
-        this.listeners.addAll(Arrays.asList(listeners));
+    public OneAdapter() {
+        mData = new ArrayList<>();
+        mTemplates = new ArrayList<>();
+    }
+
+    public OneAdapter register(OneTemplate oneTemplate) {
+        mTemplates.add(oneTemplate);
+        return this;
     }
 
     public void setData(List<?> data) {
-        this.data.clear();
-        this.data.addAll(data);
+        mData.clear();
+        mData.addAll(data);
     }
 
     public void addData(List<?> data) {
-        this.data.addAll(data);
+        mData.addAll(data);
     }
 
     public List<Object> getData() {
-        return data;
-    }
-
-    public List<OneListener> getListeners() {
-        return listeners;
+        return mData;
     }
 
     @Override
     public int getItemViewType(int position) {
-        Object o = data.get(position);
-        for (int i = 0; i < listeners.size(); i++) {
-            OneListener listener = listeners.get(i);
+        Object o = mData.get(position);
+        for (int i = 0; i < mTemplates.size(); i++) {
+            OneTemplate listener = mTemplates.get(i);
             if (listener.isMyItemViewType(position, o)) {
                 return i;
             }
@@ -55,61 +51,62 @@ public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
     @Override
     public OneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return listeners.get(viewType).getMyViewHolder(parent);
+        return mTemplates.get(viewType).getMyViewHolder(parent);
     }
 
     @Override
     public void onBindViewHolder(OneViewHolder holder, int position) {
-        Object o = data.get(position);
+        Object o = mData.get(position);
         holder.bindView(position, o);
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return mData.size();
     }
 
 }
 ```
 
-OneListener
+OneTemplate
+
 ```java
-/**
- * A listener for: define item view type and create ViewHolder, outside of the adapter
- */
-public interface OneListener{
+public interface OneTemplate {
 
     /**
-     * Is the position or the data suits for this OneListener?
+     * Is the position or the data matches this OneTemplate?
      * @param position the data's position int the list
      * @param o the data
      * @return true/false
      */
-    boolean isMyItemViewType(int position, Object o);
+    boolean isMatch(int position, Object o);
 
     /**
-     * Create a ViewHolder for this OneListener
+     * Create a ViewHolder for this OneTemplate
      * @param parent RecyclerView
      * @return OneViewHolder
      */
-    OneViewHolder getMyViewHolder(ViewGroup parent);
+    OneViewHolder getViewHolder(ViewGroup parent);
 }
 ```
 
 OneViewHolder
+
 ```java
-/**
- * A ViewHolder that auto cast the data, from Object to the type you define
- * @param <D> the data type you define
- */
 public abstract class OneViewHolder<D> extends RecyclerView.ViewHolder {
 
     public OneViewHolder(View itemView) {
         super(itemView);
+        init();
     }
 
     public OneViewHolder(ViewGroup parent, int layoutRes) {
         super(LayoutInflater.from(parent.getContext()).inflate(layoutRes, parent, false));
+        init();
+    }
+
+    protected void init(){
+        // findViewById if need.
     }
 
     void bindView(int position, Object o){
@@ -123,12 +120,8 @@ public abstract class OneViewHolder<D> extends RecyclerView.ViewHolder {
 ## DataBinding support
 
 OneViewHolderWrapper
+
 ```java
-/**
- * A wrapper of OneViewHolder, supports data binding
- * @param <D> the type of the data
- * @param <B> the type of the ViewDataBinding
- */
 public abstract class OneViewHolderWrapper<D,B extends ViewDataBinding>{
 
     private OneViewHolder<D> oneViewHolder;
@@ -145,7 +138,7 @@ public abstract class OneViewHolderWrapper<D,B extends ViewDataBinding>{
         };
     }
 
-    public OneViewHolder<D> getOneViewHolder() {
+    public OneViewHolder<D> asOneViewHolder() {
         return oneViewHolder;
     }
 
@@ -166,14 +159,14 @@ public class SimpleListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(new OneListener() {
+        oneAdapter = new OneAdapter().register(new OneTemplate() {
             @Override
-            public boolean isMyItemViewType(int position, Object o) {
+            public boolean isMatch(int position, Object o) {
                 return true;
             }
 
             @Override
-            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+            public OneViewHolder getViewHolder(ViewGroup parent) {
                 return new OneViewHolder<String>(parent, R.layout.item_text){
 
                     @Override
@@ -214,16 +207,17 @@ public class ComplexListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        oneAdapter = new OneAdapter(
-                new OneListener() {
+        oneAdapter = new OneAdapter();
+        oneAdapter.register(
+                new OneTemplate() {
 
                     @Override
-                    public boolean isMyItemViewType(int position, Object o) {
+                    public boolean isMatch(int position, Object o) {
                         return position > 30;
                     }
 
                     @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                    public OneViewHolder getViewHolder(ViewGroup parent) {
 
                         return new OneViewHolder<String>(parent, R.layout.item_text) {
                             @Override
@@ -233,60 +227,62 @@ public class ComplexListActivity extends AppCompatActivity {
                             }
                         };
                     }
-                },
-                new OneListener() {
+                })
+                .register(
+                        new OneTemplate() {
 
-                    @Override
-                    public boolean isMyItemViewType(int position, Object o) {
-                        return o instanceof String;
-                    }
-
-                    @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
-
-                        return new OneViewHolder<String>(parent, android.R.layout.activity_list_item) {
                             @Override
-                            protected void bindViewCasted(int position, String s) {
-                                TextView text1 = itemView.findViewById(android.R.id.text1);
-                                text1.setText(s);
-                                ImageView icon = itemView.findViewById(android.R.id.icon);
-                                icon.setImageResource(R.mipmap.ic_launcher);
+                            public boolean isMatch(int position, Object o) {
+                                return o instanceof String;
                             }
-                        };
-                    }
-                },
-                new OneListener() {
 
-                    @Override
-                    public boolean isMyItemViewType(int position, Object o) {
-                        return o instanceof Person;
-                    }
-
-                    @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
-
-                        return new OneViewHolderWrapper<Person, ItemPersonBinding>(parent, R.layout.item_person) {
                             @Override
-                            protected void bindViewCasted(int position, Person o) {
-                                binding.setPerson(o);
-                                binding.executePendingBindings();
+                            public OneViewHolder getViewHolder(ViewGroup parent) {
+
+                                return new OneViewHolder<String>(parent, android.R.layout.activity_list_item) {
+                                    @Override
+                                    protected void bindViewCasted(int position, String s) {
+                                        TextView text1 = itemView.findViewById(android.R.id.text1);
+                                        text1.setText(s);
+                                        ImageView icon = itemView.findViewById(android.R.id.icon);
+                                        icon.setImageResource(R.mipmap.ic_launcher);
+                                    }
+                                };
                             }
-                        }.getOneViewHolder();
-                    }
-                }
-        );
+                        })
+                .register(
+                        new OneTemplate() {
+
+                            @Override
+                            public boolean isMatch(int position, Object o) {
+                                return o instanceof Person;
+                            }
+
+                            @Override
+                            public OneViewHolder getViewHolder(ViewGroup parent) {
+
+                                return new OneViewHolderWrapper<Person, ItemPersonBinding>(parent, R.layout.item_person) {
+                                    @Override
+                                    protected void bindViewCasted(int position, Person o) {
+                                        binding.setPerson(o);
+                                        binding.executePendingBindings();
+                                    }
+                                }.asOneViewHolder();
+                            }
+                        }
+                );
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 6);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if(position == 10 || position == 11){
+                if (position == 10 || position == 11) {
                     return 3;
                 }
-                if(position > 10 && position < 26){
+                if (position > 10 && position < 26) {
                     return 2;
                 }
-                if(oneAdapter.getData().get(position) instanceof String){
+                if (oneAdapter.getData().get(position) instanceof String) {
                     return 3;
                 }
                 return 6;
@@ -301,11 +297,11 @@ public class ComplexListActivity extends AppCompatActivity {
 
     private void requestData() {
         List<Object> data = new ArrayList<>();
-        for(int i = 'A'; i <= 'z'; i++){
-            String s = (char)i + "";
+        for (int i = 'A'; i <= 'z'; i++) {
+            String s = (char) i + "";
             data.add(s);
         }
-        data.add(1,null);
+        data.add(1, null);
         data.add(3, new Person("Bill", 22));
         data.add(10, new Person("Chris", 10));
         data.add(11, new Person("Tom", 18));

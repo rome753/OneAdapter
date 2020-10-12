@@ -34,12 +34,12 @@ public class BasicActivity extends AppCompatActivity {
                 new OneTemplate() {
 
                     @Override
-                    public boolean isMyItemViewType(int position, Object o) {
+                    public boolean isMatch(int position, Object o) {
                         return true;
                     }
 
                     @Override
-                    public OneViewHolder getMyViewHolder(ViewGroup parent) {
+                    public OneViewHolder getViewHolder(ViewGroup parent) {
 
                         return new OneViewHolder<Person>(parent, R.layout.item_person) {
                             @Override

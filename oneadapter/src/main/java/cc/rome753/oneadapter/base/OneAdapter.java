@@ -44,7 +44,7 @@ public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
         Object o = mData.get(position);
         for (int i = 0; i < mTemplates.size(); i++) {
             OneTemplate listener = mTemplates.get(i);
-            if (listener.isMyItemViewType(position, o)) {
+            if (listener.isMatch(position, o)) {
                 return i;
             }
         }
@@ -53,7 +53,7 @@ public class OneAdapter extends RecyclerView.Adapter<OneViewHolder> {
 
     @Override
     public OneViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return mTemplates.get(viewType).getMyViewHolder(parent);
+        return mTemplates.get(viewType).getViewHolder(parent);
     }
 
     @Override

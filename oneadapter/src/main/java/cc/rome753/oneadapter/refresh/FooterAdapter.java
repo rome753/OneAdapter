@@ -26,12 +26,12 @@ public class FooterAdapter extends OneAdapter {
         super();
         mTemplates.add(0, new OneTemplate() {
             @Override
-            public boolean isMyItemViewType(int position, Object o) {
+            public boolean isMatch(int position, Object o) {
                 return position == getItemCount() - 1;
             }
 
             @Override
-            public OneViewHolder getMyViewHolder(ViewGroup parent) {
+            public OneViewHolder getViewHolder(ViewGroup parent) {
                 return new OneViewHolder(footerView) {
                     @Override
                     protected void bindViewCasted(int position, Object o) {
